@@ -10,6 +10,7 @@ export var KNOCKBACK = 200
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
 onready var sprite = $AnimatedBatSprite
+onready var hurtbox = $Hurtbox
 
 enum {
 	IDLE,
@@ -58,7 +59,7 @@ func seek_player():
 func _on_Hurtbox_area_entered(hitbox):
 	stats.damage(hitbox.damage)
 	knockback = hitbox.knockback_vector * KNOCKBACK
-	
+	hurtbox.create_hit_effect()
 
 
 func _on_Stats_death():
