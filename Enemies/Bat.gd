@@ -57,7 +57,7 @@ func seek_player():
 		state = CHASE
 	
 func _on_Hurtbox_area_entered(hitbox):
-	stats.damage(hitbox.damage)
+	stats.health -= hitbox.damage
 	knockback = hitbox.knockback_vector * KNOCKBACK
 	hurtbox.create_hit_effect()
 
