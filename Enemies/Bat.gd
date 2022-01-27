@@ -11,6 +11,7 @@ onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
 onready var sprite = $AnimatedBatSprite
 onready var hurtbox = $Hurtbox
+onready var softCollision = $SoftCollision
 
 enum {
 	IDLE,
@@ -33,6 +34,8 @@ func _physics_process(delta):
 		WANDER: wander_state()
 		CHASE:  chase_state(delta)
 	
+	if softCollision.is_colliding():
+		velocity += softCollision.get_push_vector() * 20
 	velocity = move_and_slide(velocity)
 
 
