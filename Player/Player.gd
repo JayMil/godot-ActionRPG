@@ -26,6 +26,7 @@ onready var animationState = animationTree.get("parameters/playback")
 onready var swordHitbox = $HitboxPivot/SwordHitbox
 onready var hurtbox = $Hurtbox
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
+onready var rollTimer = $Timers/RollTimer
 
 func _ready():
 	randomize()
@@ -42,6 +43,7 @@ func _physics_process(_delta):
 	
 func roll_state():
 	velocity = roll_vector * ROLL_SPEED
+	hurtbox.start_invincibility(0.4)
 	animationState.travel("Roll")
 	move()
 	
@@ -58,6 +60,7 @@ func attack_animation_finished():
 func roll_animation_finished():
 	velocity = Vector2.ZERO
 	state = MOVE
+	rollTimer.start(.5)
 	
 func move_state():
 	
@@ -87,20 +90,21 @@ func move_state():
 		state = ATTACK
 		
 	if Input.is_action_just_pressed("roll"):
-		state = ROLL
+		if rollTimer.get_time_left() == 0:
+			state = ROLL
 
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
-	hurtbox.start_invincibility(0.6)
-	hurtbox.create_hit_effect()
+	hurtbox.hit(0.6)
 	var playerHurtSound = PlayerHurtSound.instance()
 	get_tree().current_scene.add_child(playerHurtSound)
 
 
-func _on_Hurtbox_invincibility_started():
+
+func _on_Hurtbox_hit_started():
 	blinkAnimationPlayer.play("Start")
 
 
-func _on_Hurtbox_invincibility_ended():
+func _on_Hurtbox_hit_ended():
 	blinkAnimationPlayer.play("Stop")

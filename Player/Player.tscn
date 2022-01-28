@@ -815,7 +815,7 @@ parameters/Run/blend_position = Vector2( 0, 1 )
 [node name="HitboxPivot" type="Position2D" parent="."]
 visible = false
 position = Vector2( 0, -4 )
-rotation = 4.71239
+rotation = 1.5708
 
 [node name="SwordHitbox" parent="HitboxPivot" instance=ExtResource( 3 )]
 position = Vector2( 15, 0 )
@@ -858,9 +858,14 @@ energy = 0.5
 shadow_gradient_length = 5.0
 shadow_filter = 2
 shadow_filter_smooth = 50.0
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="RollTimer" type="Timer" parent="Timers"]
+one_shot = true
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
-[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="hit_ended" from="Hurtbox" to="." method="_on_Hurtbox_hit_ended"]
+[connection signal="hit_started" from="Hurtbox" to="." method="_on_Hurtbox_hit_started"]
 
 [editable path="HitboxPivot/SwordHitbox"]
 
