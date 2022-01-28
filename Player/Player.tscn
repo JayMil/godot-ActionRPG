@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Music and Sounds/Swipe.wav" type="AudioStream" id=7]
 [ext_resource path="res://Music and Sounds/Evade.wav" type="AudioStream" id=8]
 [ext_resource path="res://WhiteColorShader.shader" type="Shader" id=9]
+[ext_resource path="res://Shadows/light.png" type="Texture" id=10]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -840,6 +841,23 @@ stream = ExtResource( 7 )
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Start = SubResource( 49 )
 anims/Stop = SubResource( 50 )
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 10 )
+texture_scale = 0.6
+energy = 0.5
+shadow_enabled = true
+shadow_gradient_length = 5.0
+shadow_filter = 2
+shadow_filter_smooth = 50.0
+
+[node name="Light2D2" type="Light2D" parent="."]
+texture = ExtResource( 10 )
+texture_scale = 0.6
+energy = 0.5
+shadow_gradient_length = 5.0
+shadow_filter = 2
+shadow_filter_smooth = 50.0
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
