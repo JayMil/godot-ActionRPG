@@ -4,8 +4,11 @@ extends Control
 var hearts = 4 setget set_hearts
 var max_hearts = 4 setget set_max_hearts
 
+var stats = PlayerStats
+
 onready var heartUIFull = $HeartUIFull
 onready var heartUIEmpty = $HeartUIEmpty
+
 
 
 func set_hearts(value):
@@ -20,9 +23,9 @@ func set_max_hearts(value):
 		heartUIEmpty.rect_size.x = max_hearts * 15
 	
 func _ready():
-	self.max_hearts = PlayerStats.max_health
-	self.hearts = PlayerStats.health
+	self.max_hearts = stats.max_health
+	self.hearts = stats.health
 # warning-ignore:return_value_discarded
-	PlayerStats.connect("health_changed", self, "set_hearts")
+	stats.connect("health_changed", self, "set_hearts")
 # warning-ignore:return_value_discarded
-	PlayerStats.connect("max_health_changed", self, "set_max_hearts")
+	stats.connect("max_health_changed", self, "set_max_hearts")

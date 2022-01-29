@@ -19,6 +19,8 @@ var roll_vector = Vector2.DOWN
 
 # global autoload PlayerStats
 var stats = PlayerStats
+var gameOver = GameOver
+
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
@@ -28,9 +30,11 @@ onready var hurtbox = $Hurtbox
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var rollTimer = $Timers/RollTimer
 
+
 func _ready():
 	randomize()
-	stats.connect("death", self, "queue_free")
+	stats.reset()
+	stats.connect("death", self, "die")
 	animationTree.active = true
 	swordHitbox.knockback_vector = roll_vector
 		
@@ -93,6 +97,10 @@ func move_state():
 		if rollTimer.get_time_left() == 0:
 			state = ROLL
 
+func die():
+	gameOver.game_over("res://World.tscn")
+	queue_free()
+	
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
