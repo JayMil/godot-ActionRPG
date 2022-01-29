@@ -7,7 +7,7 @@
 [ext_resource path="res://World/CliffTileset.png" type="Texture" id=5]
 [ext_resource path="res://World/Grass.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Enemies/Bat.tscn" type="PackedScene" id=7]
-[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=8]
+[ext_resource path="res://UI/PlayerHUD.tscn" type="PackedScene" id=8]
 [ext_resource path="res://World/Tree.tscn" type="PackedScene" id=9]
 
 [sub_resource type="TileSet" id=1]
@@ -1091,9 +1091,7 @@ position = Vector2( -58, 40 )
 [node name="Tree2" parent="Game/YSort/Trees" instance=ExtResource( 9 )]
 position = Vector2( 16, 144 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Game"]
-
-[node name="HealthUI" parent="Game/CanvasLayer" instance=ExtResource( 8 )]
+[node name="PlayerHUD" parent="Game" instance=ExtResource( 8 )]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Game"]
 color = Color( 0.168627, 0.14902, 0.14902, 1 )

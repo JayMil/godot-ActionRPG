@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
 
+var playerStats = PlayerStats
+
 export var ACCELERATION = 4
 export var MAX_SPEED = 100
 export var FRICTION = 5
@@ -98,6 +100,7 @@ func _on_Hurtbox_area_entered(hitbox):
 func _on_Stats_death():
 	queue_free()
 	create_enemy_death_effect()
+	playerStats.killedBats += 1
 	
 func create_enemy_death_effect():
 	var enemyDeathEffect = EnemyDeathEffect.instance()
