@@ -29,6 +29,7 @@ onready var swordHitbox = $HitboxPivot/SwordHitbox
 onready var hurtbox = $Hurtbox
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var rollTimer = $Timers/RollTimer
+onready var attackTimer = $Timers/AttackTimer
 
 
 func _ready():
@@ -59,6 +60,7 @@ func move():
 	velocity = move_and_slide(velocity)
 	
 func attack_animation_finished():
+	attackTimer.start(.2)
 	state = MOVE
 	
 func roll_animation_finished():
@@ -91,7 +93,8 @@ func move_state():
 	move()
 	
 	if Input.is_action_just_pressed("attack"):
-		state = ATTACK
+		if attackTimer.get_time_left() == 0:
+			state = ATTACK
 		
 	if Input.is_action_just_pressed("roll"):
 		if rollTimer.get_time_left() == 0:
