@@ -687,12 +687,14 @@ __meta__ = {
 margin_right = 63.0
 margin_bottom = 20.0
 focus_neighbour_top = NodePath("../QuitButton")
+mouse_default_cursor_shape = 2
 text = "Start"
 
 [node name="OptionButton" type="Button" parent="VBoxContainer"]
 margin_top = 24.0
 margin_right = 63.0
 margin_bottom = 44.0
+mouse_default_cursor_shape = 2
 text = "Options"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
@@ -700,6 +702,7 @@ margin_top = 48.0
 margin_right = 63.0
 margin_bottom = 68.0
 focus_neighbour_bottom = NodePath("../StartButton")
+mouse_default_cursor_shape = 2
 text = "Quit"
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionButton" to="." method="_on_OptionButton_pressed"]
